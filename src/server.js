@@ -1,4 +1,3 @@
-// import express from 'express';
 const express = require('express');
 var cors = require('cors');
 const serverless = require("serverless-http");
@@ -24,16 +23,16 @@ const router = express.Router();
 // })
 
 router.get('/', (req, res) => {
-    res.sendFile('index.html', { root: __dirname })
-    const users = [
-        { name: 'Adi' },
-        { name: 'Shir' },
-        { name: 'Guy' }
-    ]
-    res.send(users)
-    // res.writeHead(200, { 'Content-Type': 'text/html' });
-    // res.write('<h1>Hello from Express.js!</h1>');
-    // res.end();
+    // res.sendFile('index.html', { root: __dirname })
+    // const users = [
+    //     { name: 'Adi' },
+    //     { name: 'Shir' },
+    //     { name: 'Guy' }
+    // ]
+    // res.send(users)
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write('<h1>Hello from Express.js!</h1>');
+    res.end();
 })
 
 router.get('/users', (req, res) => {
@@ -51,10 +50,10 @@ app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
-app.listen(PORT, () => {
-    console.log('Server is listening on port ' + PORT);
+// app.listen(PORT, () => {
+//     console.log('Server is listening on port ' + PORT);
 
-})
+// })
 
 module.exports = express;
 module.exports.handler = serverless(app);
