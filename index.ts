@@ -22,7 +22,13 @@ const router = express.Router();
 // })
 
 router.get('/', (req, res) => {
-    res.sendFile('index.html', { root: __dirname })
+    // res.sendFile('index.html', { root: __dirname })
+    const users = [
+        { name: 'Adi' },
+        { name: 'Shir' },
+        { name: 'Guy' }
+    ]
+    res.send(users)
 })
 
 router.get('/users', (req, res) => {
