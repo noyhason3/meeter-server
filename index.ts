@@ -20,12 +20,13 @@ app.get('/', (req, res) => {
 })
 
 app.get('/users', (req, res) => {
-    const users = [
-        { name: 'Adi' },
-        { name: 'Shir' },
-        { name: 'Guy' }
-    ]
-    res.send(users)
+    res.sendFile('index.html', { root: __dirname })
+    // const users = [
+    //     { name: 'Adi' },
+    //     { name: 'Shir' },
+    //     { name: 'Guy' }
+    // ]
+    // res.send(users)
 })
 
 app.listen(PORT, () => {
