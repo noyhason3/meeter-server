@@ -1,6 +1,7 @@
 // import express from 'express';
 const express = require('express');
 var cors = require('cors');
+// const serverless = require("serverless-http");
 
 
 const app = express();
@@ -14,22 +15,35 @@ app.use(function (req, res, next) {
     next();
 });
 
+const router = express.Router();
+// router.use((req, res, next) => {
+//     console.log('Time: ', Date.now())
+//     next()
+// })
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.sendFile('index.html', { root: __dirname })
 })
 
-app.get('/users', (req, res) => {
-    res.sendFile('index.html', { root: __dirname })
-    // const users = [
-    //     { name: 'Adi' },
-    //     { name: 'Shir' },
-    //     { name: 'Guy' }
-    // ]
-    // res.send(users)
+router.get('/users', (req, res) => {
+    // res.sendFile('index.html', { root: __dirname })
+    const users = [
+        { name: 'Adi' },
+        { name: 'Shir' },
+        { name: 'Guy' }
+    ]
+    res.send(users)
 })
+
+app.use('/', router)
 
 app.listen(PORT, () => {
     console.log('Server is listening on port ' + PORT);
 
 })
+
+module.exports = router;
+
+// app.use(`/.netlify/functions/api`, router);
+// module.exports.handler = serverless(app);
+
