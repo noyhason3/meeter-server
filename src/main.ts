@@ -3,18 +3,18 @@ config();
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import * as cors from 'cors';
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 async function bootstrap() {
   const PORT = 3333;
   const app = await NestFactory.create(AppModule);
-  app.use(cors());
-  app.use(cors({
-    origin: 'https://meeter-client.netlify.app',
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  }));
-  app.enableCors();
+  const corsOptions: CorsOptions = {
+    origin: ['https://meeter-client.netlify.app'], // Add your client's URL here
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  };
+  app.enableCors(corsOptions);
   await app.listen(PORT);
   console.log('Server is listening on port: ' + PORT);
 }
