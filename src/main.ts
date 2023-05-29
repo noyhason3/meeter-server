@@ -11,6 +11,7 @@ async function bootstrap() {
   const corsOptions: CorsOptions = {
     origin: ['https://meeter-client.netlify.app'], // Add your client's URL here
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: ['Content-Type', 'Authorization'], // Add the allowed headers here
     preflightContinue: false,
     optionsSuccessStatus: 204,
   };
